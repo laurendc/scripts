@@ -1,0 +1,33 @@
+#!/bin/bash
+# Script to check for reposado updates
+# Cron job set to run twice a week (Tues/Thurs) on master reposado sus
+# Lauren Caliolio 8/20/2014
+
+# check for deprecated updates in the testing repo
+/bin/echo "******************************************************"
+/bin/echo "These are deprecated updates in the testing repository"
+/bin/echo "******************************************************"
+/srv/reposado/reposado-master/code/repoutil --list-branch testing | grep Deprec | grep -v release
+/bin/echo ""
+
+# check for deprecated updates in the release repo
+/bin/echo "******************************************************"
+/bin/echo "These are deprecated updates in the release repository"
+/bin/echo "******************************************************"
+/srv/reposado/reposado-master/code/repoutil --list-branch release | grep Deprec
+/bin/echo ""
+
+# check for updates in testing that haven't pushed to release yet
+/bin/echo "*********************************************************"
+/bin/echo "These are updates in testing that are NOT in release yet."
+/bin/echo "*********************************************************"
+/srv/reposado/reposado-master/code/repoutil --products | /bin/grep testing | /bin/egrep -v 'release|Deprecated'
+/bin/echo ""
+
+# check for new updates
+# This omits all printer driver updates from the listing
+# Printer drivers are all deployed through Casper policy (Self Service)
+/bin/echo "*******************************"
+/bin/echo "These are new updates available"
+/bin/echo "*******************************"
+/srv/reposado/reposado-master/code/repoutil --products | /bin/egrep -v 'EPSON|Xerox|Samsung|HP|Brother|Canon|Lanier|InfoPrint|Ricoh|Gestetner|Infotec|NRG|Savin|Lexmark' | /bin/egrep -v 'testing|release|Deprecated'
