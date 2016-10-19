@@ -8,4 +8,4 @@ Many of these are used in a Mac environment managed with the JAMF Casper Suite. 
 Some of the scripts depend on cocoaDialog being installed: http://mstratman.github.io/cocoadialog/
 As an alternative, I imagine /usr/bin/osascript could be used.  Or the jamfHelper tool if you are a Casper administrator.
 
-All work with Mac OS 10.8/9 or Ubuntu Server 12.04.5 unless otherwise indicated.
+All work with Mac OS X and/or Ubuntu Server unless otherwise indicated.
